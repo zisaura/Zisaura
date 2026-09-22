@@ -1,8 +1,34 @@
 import { createFileRoute } from "@tanstack/react-router";
+import {
+  ArrowRight,
+  Building2,
+  ClipboardList,
+  Users,
+  Layers,
+  LineChart,
+  MailOpen,
+  MessageSquare,
+  Phone,
+  Receipt,
+  Repeat,
+  Search,
+  Settings2,
+  Share2,
+  Target,
+  UserRound,
+} from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { BookCallButton, CONTACT_EMAIL } from "@/components/BookingDialog";
+import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
 
-const TITLE = "Zisaura — Growth & Operations Partner for U.S. Businesses";
+const TITLE = "Zisaura | Outsourced Sales, Marketing & Back-Office Support";
 const DESCRIPTION =
-  "Zisaura is the done-for-you growth and operations team for U.S. businesses: lead generation, sales follow-up, and back-office systems run for you. Book a free strategy call.";
+  "Zisaura is an outsourced growth and operations partner for growing U.S. businesses — lead generation, sales development, social media marketing, and accounting and back-office support, run by one accountable team.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -18,358 +44,541 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+const problems = [
+  {
+    icon: Phone,
+    title: "Leads go cold",
+    body: "Inquiries arrive, then sit. By the time anyone replies, the prospect has already spoken to someone else.",
+  },
+  {
+    icon: Target,
+    title: "Sales gets neglected",
+    body: "Follow-up depends on whoever has a spare hour, so quotes go unchased and pipeline stalls.",
+  },
+  {
+    icon: Share2,
+    title: "Marketing becomes an afterthought",
+    body: "Posting and outreach happen in bursts, and nothing compounds because nothing is consistent.",
+  },
+  {
+    icon: Receipt,
+    title: "Back-office work piles up",
+    body: "Invoicing, reconciliation, and admin drift to evenings and weekends — usually the owner's.",
+  },
+];
+
 const services = [
   {
     no: "01",
-    title: "Lead Generation Engine",
-    body: "Outbound lists, cold email and LinkedIn sequences, local SEO and paid search — one pipeline that fills your calendar instead of your inbox.",
-    points: ["ICP research & list building", "Email + LinkedIn sequences", "Google & Meta campaigns"],
+    icon: Search,
+    title: "Lead Generation",
+    body: "We build and run the top of your funnel so there is always a next conversation in the pipeline.",
+    points: [
+      "Ideal-customer definition and list building",
+      "Outbound email and LinkedIn outreach",
+      "Inbound inquiry capture and routing",
+      "Campaign tracking and reporting",
+    ],
   },
   {
     no: "02",
-    title: "Sales Follow-Up & CRM",
-    body: "Every inquiry answered in minutes, every deal tracked. We build the CRM, write the follow-up, and keep the pipeline honest.",
-    points: ["Speed-to-lead automations", "CRM build & clean-up", "Proposal and quote templates"],
+    icon: MessageSquare,
+    title: "Sales Development",
+    body: "Every lead gets a timely, consistent response and a documented follow-up sequence.",
+    points: [
+      "Lead qualification and discovery calls",
+      "Structured multi-touch follow-up",
+      "CRM setup, hygiene, and pipeline stages",
+      "Proposal and quote coordination",
+    ],
   },
   {
     no: "03",
-    title: "Back-Office Operations",
-    body: "Scheduling, invoicing, AR follow-up, vendor coordination, and reporting handled by a trained U.S.-hours team.",
-    points: ["Invoicing & collections", "Scheduling & dispatch support", "Weekly KPI reporting"],
+    icon: Share2,
+    title: "Social Media Marketing",
+    body: "A steady, professional presence that supports sales conversations instead of competing with them.",
+    points: [
+      "Content calendar and copywriting",
+      "Profile and page management",
+      "Scheduling and publishing",
+      "Engagement monitoring and reporting",
+    ],
   },
   {
     no: "04",
-    title: "Systems & Automation",
-    body: "We replace the spreadsheet duct tape with documented workflows your team can actually run without you.",
-    points: ["SOPs & documentation", "Workflow automation", "Tool stack consolidation"],
+    icon: ClipboardList,
+    title: "Accounting & Back-Office Support",
+    body: "Day-to-day bookkeeping and administrative support so your records stay current. We provide support work, not CPA, tax, audit, or legal services.",
+    points: [
+      "Bookkeeping data entry and categorization",
+      "Invoicing and receivables follow-up",
+      "Expense and document organization",
+      "Administrative and scheduling support",
+    ],
+  },
+];
+
+const whyZisaura = [
+  {
+    icon: UserRound,
+    title: "One point of contact",
+    body: "A single accountable partner across sales and operations, rather than four vendors who never talk to each other.",
+  },
+  {
+    icon: Settings2,
+    title: "Built around your business",
+    body: "We start from how your business already sells and operates, then build the process around it.",
+  },
+  {
+    icon: ClipboardList,
+    title: "Clear monthly scope",
+    body: "You know what is being worked on, who is doing it, and what was delivered each month.",
+  },
+  {
+    icon: Layers,
+    title: "Built to scale",
+    body: "Start with one function. Add the next when it makes sense — the systems are documented as we go.",
   },
 ];
 
 const steps = [
   {
-    label: "Week 1",
-    title: "Diagnostic",
-    body: "A 60-minute call plus a review of your funnel, tools, and numbers. You get a written map of where revenue and hours are leaking.",
+    no: "01",
+    title: "Discover",
+    body: "We map how leads arrive, how deals move, and where admin work is accumulating today.",
   },
   {
-    label: "Week 2",
+    no: "02",
+    title: "Prioritize",
+    body: "Together we pick the one function that will relieve the most pressure first.",
+  },
+  {
+    no: "03",
     title: "Build",
-    body: "We stand up the pipeline, CRM, and automations, and document how each step runs. No new software for your team to learn from scratch.",
+    body: "We set up the process, tools, templates, and documentation needed to run it properly.",
   },
   {
-    label: "Week 3–4",
+    no: "04",
     title: "Run",
-    body: "Our team operates it during U.S. business hours — outreach sent, leads answered, invoices chased, reports delivered every Friday.",
+    body: "Our team operates it as an agreed monthly scope, with regular reporting back to you.",
   },
   {
-    label: "Ongoing",
-    title: "Scale",
-    body: "Monthly review of cost per lead, close rate, and cycle time. We double down on what works and retire what doesn't.",
+    no: "05",
+    title: "Improve",
+    body: "We review what is working, refine the process, and expand only when the current work is stable.",
   },
 ];
 
-const testimonials = [
+const audience = [
   {
-    quote:
-      "We went from chasing quotes at 10pm to a pipeline that runs itself. Zisaura booked 34 qualified appointments for us in the first quarter.",
-    name: "Marcus Ellery",
-    role: "Owner, Ellery Mechanical — Columbus, OH",
+    icon: LineChart,
+    title: "Growing businesses",
+    body: "Demand is increasing faster than the internal capacity to handle it properly.",
   },
   {
-    quote:
-      "Their team cleaned up two years of messy invoicing and cut our average collection time from 51 days to 19. That alone paid for the engagement.",
-    name: "Dana Whitfield",
-    role: "COO, Whitfield Dental Group — Austin, TX",
+    icon: UserRound,
+    title: "Owner-led companies",
+    body: "Too much still routes through the owner, from follow-up to invoicing.",
   },
   {
-    quote:
-      "It feels like hiring a director of operations without the six-figure salary. Everything is documented, and I finally know my numbers weekly.",
-    name: "Priya Raghavan",
-    role: "Founder, Northbay Logistics — Sacramento, CA",
+    icon: Users,
+    title: "Lean teams",
+    body: "A small team already at capacity, with no appetite for four new hires.",
   },
 ];
 
-const valueProps = [
-  {
-    title: "U.S. business hours, always",
-    body: "Coverage across all four time zones, so a lead at 8:04am in Boston is answered before your competitor opens.",
-  },
-  {
-    title: "Built for U.S. compliance",
-    body: "CAN-SPAM and TCPA-aware outreach, W-9s and 1099 workflows, state sales-tax-aware invoicing.",
-  },
-  {
-    title: "One partner, not five vendors",
-    body: "Marketing agency, VA firm, bookkeeper, and automation consultant replaced by one accountable team.",
-  },
-  {
-    title: "Flat monthly fee",
-    body: "No hourly billing, no ad-spend percentage games. You know the number before you sign.",
-  },
+const expansion = [
+  "Lead Generation",
+  "Sales Follow-Up",
+  "Social Media",
+  "Back Office",
+  "Integrated Operations",
 ];
 
-const stats = [
-  { value: "120+", label: "U.S. businesses supported" },
-  { value: "3.4x", label: "Average pipeline growth in 6 months" },
-  { value: "< 5 min", label: "Median lead response time" },
-  { value: "19 days", label: "Average invoice collection time" },
+const faqs = [
+  {
+    q: "What exactly does Zisaura do?",
+    a: "We act as an outsourced growth and operations function. That covers lead generation, sales development and follow-up, social media marketing, and accounting and back-office support — coordinated by one team rather than four separate providers.",
+  },
+  {
+    q: "Do you guarantee leads or sales?",
+    a: "No. We commit to executing the activities we agree on, consistently and transparently, and to reporting what was done and what resulted. Anyone guaranteeing a specific number of leads or sales is guessing about your market.",
+  },
+  {
+    q: "Do we have to start with everything?",
+    a: "No. Most engagements begin with a single function — usually the one causing the most pressure — and expand only when that work is running reliably.",
+  },
+  {
+    q: "Are you an accounting firm?",
+    a: "No. We provide bookkeeping and back-office support work. We do not provide CPA, tax, audit, or legal services, and we work alongside your accountant rather than replacing them.",
+  },
+  {
+    q: "How is the work scoped and priced?",
+    a: "As a defined monthly scope agreed in advance, so you know what is included before anything starts. We discuss scope and pricing openly on the first call.",
+  },
+  {
+    q: "What happens on the first call?",
+    a: "A short conversation about how your business currently gets leads, follows up, and handles admin. If there is an obvious first thing we can take off your plate, we will say so. If there isn't, we will say that too.",
+  },
 ];
 
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <a href="#top" className="font-display text-xl tracking-tight">
-            Zisaura<span className="text-accent">.</span>
-          </a>
-          <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
-            <a href="#value" className="transition-colors hover:text-foreground">
-              Why Zisaura
-            </a>
-            <a href="#services" className="transition-colors hover:text-foreground">
-              Services
-            </a>
-            <a href="#process" className="transition-colors hover:text-foreground">
-              Process
-            </a>
-            <a href="#testimonials" className="transition-colors hover:text-foreground">
-              Results
-            </a>
-          </nav>
-          <a
-            href="#book"
-            className="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground transition-transform hover:-translate-y-0.5"
-          >
-            Book a call
-          </a>
-        </div>
-      </header>
+      <SiteHeader />
 
-      {/* Hero */}
-      <section id="top" className="relative overflow-hidden border-b border-border/60">
-        <div className="pointer-events-none absolute -right-32 -top-40 h-[34rem] w-[34rem] rounded-full bg-accent/15 blur-3xl" />
-        <div className="mx-auto grid max-w-6xl gap-14 px-6 py-24 lg:grid-cols-[1.15fr_0.85fr] lg:py-32">
-          <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-              Growth & operations partner
-            </span>
-            <h1 className="font-display mt-7 text-5xl leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-              Your growth engine and back office, run by one team.
-            </h1>
-            <p className="mt-7 max-w-xl text-lg text-muted-foreground">
-              Zisaura is the done-for-you growth and operations partner for U.S.
-              businesses doing $500K–$20M. We fill your pipeline, answer every lead,
-              and keep the back office running — so you can stay out of the weeds.
-            </p>
-            <div className="mt-9 flex flex-wrap items-center gap-4">
-              <a
-                href="#book"
-                className="rounded-full bg-accent px-7 py-3.5 text-sm font-medium text-accent-foreground transition-transform hover:-translate-y-0.5"
-              >
-                Book a free strategy call
-              </a>
-              <a
-                href="#services"
-                className="rounded-full border border-border px-7 py-3.5 text-sm font-medium transition-colors hover:bg-secondary"
-              >
-                See what we run
-              </a>
-            </div>
-            <p className="mt-5 text-sm text-muted-foreground">
-              30 minutes. No pitch deck. You leave with a written plan either way.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 self-center">
-            {stats.map((s) => (
-              <div
-                key={s.label}
-                className="rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-soft)]"
-              >
-                <div className="font-display text-3xl tracking-tight">{s.value}</div>
-                <div className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                  {s.label}
-                </div>
+      <main>
+        {/* Hero */}
+        <section className="relative overflow-hidden border-b border-border">
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.35] grid-lines"
+            aria-hidden="true"
+          />
+          <div
+            className="pointer-events-none absolute -right-40 -top-40 h-[32rem] w-[32rem] rounded-full blur-3xl"
+            style={{ background: "var(--gradient-accent)" }}
+            aria-hidden="true"
+          />
+          <div className="relative mx-auto grid max-w-6xl gap-16 px-5 py-20 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-28">
+            <div className="rise">
+              <p className="eyebrow">Outsourced Growth &amp; Operations</p>
+              <h1 className="font-display mt-6 text-4xl leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
+                Your sales and back office.
+                <br />
+                <span className="text-accent">One team.</span>
+              </h1>
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                Zisaura runs the work that keeps a growing business moving —
+                generating leads, following up on sales, maintaining your presence,
+                and handling back-office admin — as one coordinated function instead
+                of four disconnected services.
+              </p>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <BookCallButton />
+                <a
+                  href="#services"
+                  className="inline-flex items-center justify-center gap-2 rounded-md border border-border-strong px-5 py-3 text-sm font-medium transition-colors hover:bg-secondary"
+                >
+                  Explore Services
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </a>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+              <p className="mt-6 font-mono text-xs text-muted-foreground">
+                No long-term commitment required to start a conversation.
+              </p>
+            </div>
 
-      {/* Value proposition */}
-      <section id="value" className="border-b border-border/60 bg-secondary/40">
-        <div className="mx-auto max-w-6xl px-6 py-24">
-          <SectionLabel>The value proposition</SectionLabel>
-          <div className="mt-6 grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-            <h2 className="font-display text-4xl leading-tight tracking-tight sm:text-5xl">
-              Built specifically for how U.S. businesses win work.
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Most owners are stuck between an agency that only does ads and a
-              bookkeeper who only does books. Zisaura sits across both: the revenue
-              side and the operations side, staffed for American business hours and
-              American paperwork. One contract, one point of contact, one weekly
-              report you can actually read.
-            </p>
+            <OperatingSystemVisual />
           </div>
+        </section>
 
-          <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2">
-            {valueProps.map((v) => (
-              <div key={v.title} className="bg-card p-8">
-                <h3 className="text-lg font-semibold tracking-tight">{v.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {v.body}
+        {/* Problem */}
+        <Section id="problem" eyebrow="The Problem">
+          <SectionHeading>
+            Growth gets complicated when everything depends on the owner.
+          </SectionHeading>
+          <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2">
+            {problems.map((p) => (
+              <div key={p.title} className="bg-card p-7">
+                <p.icon className="h-5 w-5 text-accent" aria-hidden="true" />
+                <h3 className="font-display mt-5 text-lg tracking-tight">{p.title}</h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
+                  {p.body}
                 </p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Services */}
-      <section id="services" className="border-b border-border/60">
-        <div className="mx-auto max-w-6xl px-6 py-24">
-          <SectionLabel>Services</SectionLabel>
-          <h2 className="font-display mt-6 max-w-2xl text-4xl leading-tight tracking-tight sm:text-5xl">
-            Four systems we own end to end.
-          </h2>
-          <div className="mt-14 grid gap-6 md:grid-cols-2">
+        {/* Services */}
+        <Section id="services" eyebrow="What We Do" tone="surface">
+          <SectionHeading>Four functions. One accountable partner.</SectionHeading>
+          <div className="mt-12 grid gap-5 lg:grid-cols-2">
             {services.map((s) => (
-              <div
+              <article
                 key={s.no}
-                className="group rounded-2xl border border-border bg-card p-8 transition-shadow hover:shadow-[var(--shadow-soft)]"
+                className="rounded-lg border border-border bg-card p-7 transition-colors hover:border-border-strong"
               >
-                <div className="font-display text-sm text-accent">{s.no}</div>
-                <h3 className="font-display mt-3 text-2xl tracking-tight">{s.title}</h3>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs tracking-[0.2em] text-accent">
+                    {s.no}
+                  </span>
+                  <s.icon className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+                </div>
+                <h3 className="font-display mt-6 text-2xl tracking-tight">{s.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                   {s.body}
                 </p>
-                <ul className="mt-6 space-y-2 border-t border-border pt-5">
+                <ul className="mt-6 space-y-2.5 border-t border-border pt-5">
                   {s.points.map((p) => (
-                    <li key={p} className="flex items-start gap-3 text-sm">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                      <span className="text-muted-foreground">{p}</span>
+                    <li key={p} className="flex gap-3 text-sm text-muted-foreground">
+                      <span
+                        className="mt-[0.45rem] h-1 w-1 shrink-0 rounded-full bg-accent"
+                        aria-hidden="true"
+                      />
+                      {p}
                     </li>
                   ))}
                 </ul>
+              </article>
+            ))}
+          </div>
+        </Section>
+
+        {/* Why Zisaura */}
+        <Section id="about" eyebrow="Why Zisaura">
+          <SectionHeading>An operating partner, not another vendor.</SectionHeading>
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
+            Zisaura exists because growing businesses rarely need four separate
+            agencies. They need one team that understands how the work connects, and
+            takes responsibility for keeping it running.
+          </p>
+          <div className="mt-12 grid gap-5 sm:grid-cols-2">
+            {whyZisaura.map((w) => (
+              <div
+                key={w.title}
+                className="flex gap-5 rounded-lg border border-border bg-card p-7"
+              >
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-border bg-secondary">
+                  <w.icon className="h-5 w-5 text-accent" aria-hidden="true" />
+                </div>
+                <div>
+                  <h3 className="font-display text-lg tracking-tight">{w.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {w.body}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Process */}
-      <section id="process" className="border-b border-border/60 bg-primary text-primary-foreground">
-        <div className="mx-auto max-w-6xl px-6 py-24">
-          <span className="text-xs uppercase tracking-[0.22em] text-primary-foreground/60">
-            Process
-          </span>
-          <h2 className="font-display mt-6 max-w-2xl text-4xl leading-tight tracking-tight sm:text-5xl">
-            Live in 30 days, documented from day one.
-          </h2>
-          <div className="mt-16 grid gap-10 md:grid-cols-2 lg:grid-cols-4">
-            {steps.map((step, i) => (
-              <div key={step.title} className="relative">
-                <div className="flex items-center gap-3">
-                  <span className="font-display text-2xl text-accent">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-xs uppercase tracking-[0.18em] text-primary-foreground/60">
-                    {step.label}
-                  </span>
-                </div>
-                <div className="mt-5 h-px w-full bg-primary-foreground/20" />
-                <h3 className="font-display mt-5 text-xl tracking-tight">{step.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-primary-foreground/70">
-                  {step.body}
+        {/* How it works */}
+        <Section id="how-it-works" eyebrow="How It Works" tone="surface">
+          <SectionHeading>A deliberate five-step engagement.</SectionHeading>
+          <ol className="mt-12 grid gap-5 md:grid-cols-3 lg:grid-cols-5">
+            {steps.map((s) => (
+              <li key={s.no} className="rounded-lg border border-border bg-card p-6">
+                <span className="font-mono text-xs tracking-[0.2em] text-accent">
+                  {s.no}
+                </span>
+                <div className="mt-4 h-px w-full bg-border" aria-hidden="true" />
+                <h3 className="font-display mt-4 text-lg tracking-tight">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {s.body}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </Section>
+
+        {/* Who we work with */}
+        <Section id="who-we-work-with" eyebrow="Who We Work With">
+          <SectionHeading>Built for businesses in the messy middle.</SectionHeading>
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {audience.map((a) => (
+              <div key={a.title} className="rounded-lg border border-border bg-card p-7">
+                <a.icon className="h-5 w-5 text-accent" aria-hidden="true" />
+                <h3 className="font-display mt-5 text-lg tracking-tight">{a.title}</h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
+                  {a.body}
                 </p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Testimonials */}
-      <section id="testimonials" className="border-b border-border/60">
-        <div className="mx-auto max-w-6xl px-6 py-24">
-          <SectionLabel>Results</SectionLabel>
-          <h2 className="font-display mt-6 max-w-2xl text-4xl leading-tight tracking-tight sm:text-5xl">
-            What owners say after two quarters.
-          </h2>
-          <div className="mt-14 grid gap-6 lg:grid-cols-3">
-            {testimonials.map((t) => (
-              <figure
-                key={t.name}
-                className="flex flex-col justify-between rounded-2xl border border-border bg-card p-8"
-              >
-                <blockquote className="font-display text-xl leading-snug tracking-tight">
-                  “{t.quote}”
-                </blockquote>
-                <figcaption className="mt-8 border-t border-border pt-5">
-                  <div className="text-sm font-semibold">{t.name}</div>
-                  <div className="mt-1 text-sm text-muted-foreground">{t.role}</div>
-                </figcaption>
-              </figure>
+        {/* Starting point */}
+        <Section id="starting-point" eyebrow="Starting Point" tone="surface">
+          <SectionHeading>Start with one function. Expand when it's working.</SectionHeading>
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
+            Most partnerships follow the same path. You don't have to move through all
+            of it — you move as far as it makes sense for your business.
+          </p>
+          <div className="mt-12 flex flex-col gap-3 lg:flex-row lg:items-stretch">
+            {expansion.map((label, i) => (
+              <div key={label} className="flex flex-1 items-center gap-3">
+                <div className="flex-1 rounded-lg border border-border bg-card px-5 py-6">
+                  <span className="font-mono text-xs text-accent">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="mt-3 text-sm font-medium leading-snug">{label}</p>
+                </div>
+                {i < expansion.length - 1 && (
+                  <ArrowRight
+                    className="hidden h-4 w-4 shrink-0 text-muted-foreground lg:block"
+                    aria-hidden="true"
+                  />
+                )}
+              </div>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Booking CTA */}
-      <section id="book" className="bg-secondary/40">
-        <div className="mx-auto max-w-3xl px-6 py-24 text-center">
-          <SectionLabel center>Book a call</SectionLabel>
-          <h2 className="font-display mt-6 text-4xl leading-tight tracking-tight sm:text-5xl">
-            Let's find the leaks in 30 minutes.
-          </h2>
-          <p className="mt-6 text-lg text-muted-foreground">
-            Bring your numbers, your tools, and your biggest bottleneck. You'll leave
-            with a written plan you can run with or without us.
-          </p>
-          <div className="mt-9 flex flex-wrap justify-center gap-4">
-            <a
-              href="mailto:hello@zisaura.com?subject=Strategy%20call%20request"
-              className="rounded-full bg-accent px-8 py-4 text-sm font-medium text-accent-foreground transition-transform hover:-translate-y-0.5"
-            >
-              Book your strategy call
-            </a>
-            <a
-              href="mailto:hello@zisaura.com"
-              className="rounded-full border border-border px-8 py-4 text-sm font-medium transition-colors hover:bg-card"
-            >
-              hello@zisaura.com
-            </a>
+        {/* Transparency */}
+        <Section id="transparency" eyebrow="Transparency">
+          <SectionHeading>Simple, transparent partnerships.</SectionHeading>
+          <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border md:grid-cols-3">
+            {[
+              {
+                icon: ClipboardList,
+                title: "Scope agreed in advance",
+                body: "You know what is included each month before any work begins.",
+              },
+              {
+                icon: Repeat,
+                title: "Regular reporting",
+                body: "A clear account of what was done and what came of it — no vague dashboards.",
+              },
+              {
+                icon: Building2,
+                title: "No overstated claims",
+                body: "We describe what we will do, not results we cannot promise.",
+              },
+            ].map((t) => (
+              <div key={t.title} className="bg-card p-7">
+                <t.icon className="h-5 w-5 text-accent" aria-hidden="true" />
+                <h3 className="font-display mt-5 text-lg tracking-tight">{t.title}</h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
+                  {t.body}
+                </p>
+              </div>
+            ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      <footer className="border-t border-border/60">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-10 text-sm text-muted-foreground sm:flex-row">
-          <span className="font-display text-base text-foreground">
-            Zisaura<span className="text-accent">.</span>
-          </span>
-          <span>Growth & operations for U.S. businesses. All 50 states.</span>
-        </div>
-      </footer>
+        {/* FAQ */}
+        <Section id="faq" eyebrow="FAQ" tone="surface">
+          <SectionHeading>Questions worth asking.</SectionHeading>
+          <Accordion type="single" collapsible className="mt-12 max-w-3xl">
+            {faqs.map((f) => (
+              <AccordionItem key={f.q} value={f.q} className="border-border">
+                <AccordionTrigger className="text-left font-display text-base tracking-tight hover:no-underline">
+                  {f.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
+                  {f.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </Section>
+
+        {/* Final CTA / booking */}
+        <section id="contact" className="border-b border-border">
+          <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8">
+            <div className="relative overflow-hidden rounded-xl border border-border bg-card p-9 sm:p-14">
+              <div
+                className="pointer-events-none absolute inset-0 opacity-30 grid-lines"
+                aria-hidden="true"
+              />
+              <div className="relative max-w-2xl">
+                <p className="eyebrow">Book a Call</p>
+                <h2 className="font-display mt-6 text-3xl leading-tight tracking-tight sm:text-4xl">
+                  Let's find the first thing Zisaura can take off your plate.
+                </h2>
+                <p className="mt-5 text-base leading-relaxed text-muted-foreground">
+                  A short, direct conversation about how your business currently gets
+                  leads, follows up, and handles admin. No pitch deck, no pressure.
+                </p>
+                <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                  <BookCallButton />
+                  <a
+                    href={`mailto:${CONTACT_EMAIL}`}
+                    className="inline-flex items-center justify-center gap-2 rounded-md border border-border-strong px-5 py-3 text-sm font-medium transition-colors hover:bg-secondary"
+                  >
+                    <MailOpen className="h-4 w-4" aria-hidden="true" />
+                    {CONTACT_EMAIL}
+                  </a>
+                </div>
+                <p className="mt-6 font-mono text-xs text-muted-foreground">
+                  No long-term commitment required to start a conversation.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <SiteFooter />
     </div>
   );
 }
 
-function SectionLabel({
+function Section({
+  id,
+  eyebrow,
+  tone,
   children,
-  center,
 }: {
+  id: string;
+  eyebrow: string;
+  tone?: "surface";
   children: React.ReactNode;
-  center?: boolean;
 }) {
   return (
-    <span
-      className={`block text-xs uppercase tracking-[0.22em] text-muted-foreground ${
-        center ? "text-center" : ""
-      }`}
+    <section
+      id={id}
+      className={`border-b border-border ${tone === "surface" ? "bg-surface" : ""}`}
     >
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 lg:py-28">
+        <p className="eyebrow">{eyebrow}</p>
+        {children}
+      </div>
+    </section>
+  );
+}
+
+function SectionHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="font-display mt-6 max-w-3xl text-3xl leading-tight tracking-tight sm:text-4xl lg:text-[2.75rem]">
       {children}
-    </span>
+    </h2>
+  );
+}
+
+function OperatingSystemVisual() {
+  const nodes = [
+    { label: "Lead", icon: Search },
+    { label: "Sales", icon: MessageSquare },
+    { label: "Customer", icon: UserRound },
+    { label: "Operations", icon: Settings2 },
+  ];
+
+  return (
+    <div
+      className="relative rounded-xl border border-border bg-card p-7 shadow-[var(--shadow-panel)] sm:p-9"
+      role="img"
+      aria-label="Diagram of a connected business operating system: Lead flows to Sales, Sales to Customer, Customer to Operations, and Operations back to Lead."
+    >
+      <div className="flex items-center justify-between font-mono text-[0.625rem] uppercase tracking-[0.2em] text-muted-foreground">
+        <span>Operating System</span>
+        <span className="text-accent">Connected</span>
+      </div>
+
+      <div className="mt-8 space-y-4">
+        {nodes.map((n, i) => (
+          <div key={n.label}>
+            <div className="flex items-center gap-4 rounded-lg border border-border bg-secondary/60 px-5 py-4">
+              <div className="flex h-9 w-9 items-center justify-center rounded-md border border-border bg-background">
+                <n.icon className="h-4 w-4 text-accent" aria-hidden="true" />
+              </div>
+              <span className="text-sm font-medium">{n.label}</span>
+              <span className="ml-auto font-mono text-[0.625rem] text-muted-foreground">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+            </div>
+            {i < nodes.length - 1 && (
+              <div className="ml-9 h-5 w-px bg-border" aria-hidden="true" />
+            )}
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-8 flex items-center gap-3 border-t border-border pt-6 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-muted-foreground">
+        <Repeat className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
+        One continuous loop — run by one team
+      </div>
+    </div>
   );
 }
