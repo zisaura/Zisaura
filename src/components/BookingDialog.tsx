@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import { CalendarClock, Mail } from "lucide-react";
+import { CalendarClock, Mail, MessageSquareText } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -13,6 +14,7 @@ import {
  * (Calendly, Cal.com, HubSpot, etc.) is supplied. Replace BOOKING_URL below
  * and the panel becomes a direct link to the calendar.
  */
+export const BOOKING_URL_PLACEHOLDER = "BOOKING_URL_PLACEHOLDER";
 export const BOOKING_URL: string | null = null;
 export const CONTACT_EMAIL = "hello@zisaura.com";
 
@@ -38,18 +40,20 @@ export function BookingProvider({ children }: { children: ReactNode }) {
               Book a free call
             </DialogTitle>
             <DialogDescription className="text-muted-foreground">
-              Online scheduling isn't connected yet. Send a short note with your
-              availability and we'll confirm a time.
+              Tell us what you want to improve and we’ll follow up to arrange a time.
             </DialogDescription>
           </DialogHeader>
 
           <div className="mt-2 space-y-3">
-            <a
-              href={`mailto:${CONTACT_EMAIL}?subject=Request%20a%20free%20call`}
-              className="flex items-center gap-3 rounded-md bg-accent px-4 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
-            >
+            <Button asChild className="h-11 w-full justify-start bg-accent text-accent-foreground hover:bg-accent/90">
+              <a href="/#contact" onClick={() => setIsOpen(false)}>
+                <MessageSquareText aria-hidden="true" />
+                Send an inquiry
+              </a>
+            </Button>
+            <a href={`mailto:${CONTACT_EMAIL}`} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
               <Mail className="h-4 w-4" aria-hidden="true" />
-              Email {CONTACT_EMAIL}
+              {CONTACT_EMAIL}
             </a>
             <p className="font-mono text-xs leading-relaxed text-muted-foreground">
               No long-term commitment required to start a conversation.
@@ -92,8 +96,8 @@ export function BookCallButton({
   }
 
   return (
-    <button type="button" onClick={open} className={`${base} ${styles} ${className}`}>
+    <Button type="button" onClick={open} className={`${base} ${styles} ${className}`}>
       {children}
-    </button>
+    </Button>
   );
 }
