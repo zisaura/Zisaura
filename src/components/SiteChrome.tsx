@@ -2,11 +2,12 @@ import { useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { BookCallButton } from "@/components/BookingDialog";
+import { Button } from "@/components/ui/button";
 
 const navLinks = [
   { label: "Services", href: "/#services" },
+  { label: "Plans", href: "/#plans" },
   { label: "How It Works", href: "/#how-it-works" },
-  { label: "About", href: "/#about" },
   { label: "FAQ", href: "/#faq" },
 ];
 
@@ -46,15 +47,17 @@ export function SiteHeader() {
           <BookCallButton className="px-4 py-2">Book a Call</BookCallButton>
         </div>
 
-        <button
+        <Button
+          variant="outline"
+          size="icon"
           type="button"
           onClick={() => setMenuOpen((v) => !v)}
           aria-expanded={menuOpen}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border md:hidden"
+          className="h-10 w-10 md:hidden"
         >
           {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        </Button>
       </div>
 
       {menuOpen && (
@@ -86,12 +89,17 @@ export function SiteHeader() {
 export function SiteFooter() {
   return (
     <footer className="border-t border-border bg-surface">
-      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <Wordmark />
           <p className="mt-3 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
             Outsourced Growth &amp; Operations
           </p>
+        </div>
+
+        <div>
+          <h2 className="text-sm font-medium">Contact</h2>
+          <a href="mailto:hello@zisaura.com" className="mt-4 block text-sm text-muted-foreground transition-colors hover:text-foreground">hello@zisaura.com</a>
         </div>
 
         <div>
@@ -125,7 +133,7 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-border">
         <div className="mx-auto max-w-6xl px-5 py-6 font-mono text-xs text-muted-foreground sm:px-8">
-          © {new Date().getFullYear()} Zisaura. All rights reserved.
+          © 2026 Zisaura. All rights reserved.
         </div>
       </div>
     </footer>
