@@ -121,12 +121,12 @@ const steps = [
 ];
 
 const faqs = [
-  ["Do you work with businesses in the U.S.?", "Yes. Zisaura is focused on supporting growing U.S. businesses with outsourced growth and operational functions."],
-  ["Can I outsource only one function?", "Yes. Businesses can start with the function or functions that are most relevant to their current needs."],
-  ["Can I add services later?", "Yes. As requirements change, additional functions can be added subject to scope and capacity."],
-  ["Do you guarantee leads or sales?", "No. Results depend on factors including the market, offer, pricing, sales process and execution. Zisaura focuses on delivering the agreed work, processes and reporting."],
-  ["Are you a CPA firm?", "Zisaura provides bookkeeping and back-office support. CPA, tax, audit and other regulated professional services are not included unless separately provided by appropriately qualified professionals."],
-  ["How does pricing work?", "Plans have a setup fee and monthly service fee. Final scope and workload are agreed before work begins."],
+  { question: "Do you work with businesses in the U.S.?", answer: "Yes. Zisaura is focused on supporting growing U.S. businesses with outsourced growth and operational functions." },
+  { question: "Can I outsource only one function?", answer: "Yes. Businesses can start with the function or functions that are most relevant to their current needs." },
+  { question: "Can I add services later?", answer: "Yes. As requirements change, additional functions can be added subject to scope and capacity." },
+  { question: "Do you guarantee leads or sales?", answer: "No. Results depend on factors including the market, offer, pricing, sales process and execution. Zisaura focuses on delivering the agreed work, processes and reporting." },
+  { question: "Are you a CPA firm?", answer: "Zisaura provides bookkeeping and back-office support. CPA, tax, audit and other regulated professional services are not included unless separately provided by appropriately qualified professionals." },
+  { question: "How does pricing work?", answer: "Plans have a setup fee and monthly service fee. Final scope and workload are agreed before work begins." },
 ];
 
 function Index() {
@@ -199,14 +199,14 @@ function Index() {
           </p>
           <div className="mt-12 grid gap-5 md:grid-cols-3">
             {[
-              [Users, "One team", "Keep related growth and operational functions coordinated."],
-              [Layers3, "Flexible support", "Start with the functions that matter most and expand as your needs change."],
-              [ClipboardList, "Clear execution", "Work from defined responsibilities, reporting and practical workflows."],
-            ].map(([Icon, title, copy]) => (
-              <article key={String(title)} className="rounded-lg border border-border bg-card p-7">
+              { icon: Users, title: "One team", copy: "Keep related growth and operational functions coordinated." },
+              { icon: Layers3, title: "Flexible support", copy: "Start with the functions that matter most and expand as your needs change." },
+              { icon: ClipboardList, title: "Clear execution", copy: "Work from defined responsibilities, reporting and practical workflows." },
+            ].map(({ icon: Icon, title, copy }) => (
+              <article key={title} className="rounded-lg border border-border bg-card p-7">
                 <Icon className="h-5 w-5 text-accent" aria-hidden="true" />
-                <h3 className="mt-5 font-display text-xl">{String(title)}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{String(copy)}</p>
+                <h3 className="mt-5 font-display text-xl">{title}</h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{copy}</p>
               </article>
             ))}
           </div>
@@ -252,14 +252,14 @@ function Index() {
           <p className="mt-5 max-w-3xl text-base leading-relaxed text-muted-foreground">Zisaura works with growing U.S. businesses that need additional execution capacity without immediately building a large internal team.</p>
           <div className="mt-12 grid gap-5 md:grid-cols-3">
             {[
-              [LineChart, "Growing businesses", "Businesses that need more capacity as they grow."],
-              [UserRound, "Owner-led companies", "Business owners who are still personally handling too many recurring tasks."],
-              [Users, "Lean teams", "Companies that need additional execution without adding multiple full-time roles."],
-            ].map(([Icon, title, body]) => (
-              <article key={String(title)} className="rounded-lg border border-border bg-card p-7">
+              { icon: LineChart, title: "Growing businesses", body: "Businesses that need more capacity as they grow." },
+              { icon: UserRound, title: "Owner-led companies", body: "Business owners who are still personally handling too many recurring tasks." },
+              { icon: Users, title: "Lean teams", body: "Companies that need additional execution without adding multiple full-time roles." },
+            ].map(({ icon: Icon, title, body }) => (
+              <article key={title} className="rounded-lg border border-border bg-card p-7">
                 <Icon className="h-5 w-5 text-accent" aria-hidden="true" />
-                <h3 className="mt-5 font-display text-xl">{String(title)}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{String(body)}</p>
+                <h3 className="mt-5 font-display text-xl">{title}</h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{body}</p>
               </article>
             ))}
           </div>
@@ -269,15 +269,15 @@ function Index() {
           <SectionHeading>Straightforward from the start.</SectionHeading>
           <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2">
             {[
-              [ClipboardList, "Clear scope", "We define responsibilities and deliverables before work begins."],
-              [FileText, "Real reporting", "You should know what work is being performed and what is happening."],
-              [Settings2, "Practical support", "We focus on execution that supports the way your business actually operates."],
-              [CheckCircle2, "No inflated promises", "We do not promise guaranteed sales or results that depend on factors outside our control."],
-            ].map(([Icon, title, body]) => (
-              <article key={String(title)} className="bg-card p-7">
+              { icon: ClipboardList, title: "Clear scope", body: "We define responsibilities and deliverables before work begins." },
+              { icon: FileText, title: "Real reporting", body: "You should know what work is being performed and what is happening." },
+              { icon: Settings2, title: "Practical support", body: "We focus on execution that supports the way your business actually operates." },
+              { icon: CheckCircle2, title: "No inflated promises", body: "We do not promise guaranteed sales or results that depend on factors outside our control." },
+            ].map(({ icon: Icon, title, body }) => (
+              <article key={title} className="bg-card p-7">
                 <Icon className="h-5 w-5 text-accent" aria-hidden="true" />
-                <h3 className="mt-5 font-display text-lg">{String(title)}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{String(body)}</p>
+                <h3 className="mt-5 font-display text-lg">{title}</h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{body}</p>
               </article>
             ))}
           </div>
@@ -286,7 +286,7 @@ function Index() {
         <Section id="faq" eyebrow="FAQ" tone="surface">
           <SectionHeading>Questions before we start.</SectionHeading>
           <Accordion type="single" collapsible className="mt-12 max-w-3xl">
-            {faqs.map(([question, answer]) => (
+            {faqs.map(({ question, answer }) => (
               <AccordionItem key={question} value={question} className="border-border">
                 <AccordionTrigger className="text-left font-display text-base hover:no-underline">{question}</AccordionTrigger>
                 <AccordionContent className="text-sm leading-relaxed text-muted-foreground">{answer}</AccordionContent>
