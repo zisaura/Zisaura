@@ -141,7 +141,7 @@ export function ContactForm() {
   );
 }
 
-function Field({ label, id, error, children }: { label: string; id: string; error?: string; children: React.ReactNode }) {
+function Field({ label, id, error, children }: { label: string; id: string; error: string | undefined; children: React.ReactNode }) {
   return (
     <div>
       <Label htmlFor={id}>{label}</Label>
